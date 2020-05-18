@@ -1,0 +1,39 @@
+version: '3'
+services:
+
+  webserver:
+    image: nginx:alpine
+    container_name: nginx
+    restart: unless-stopped
+    volumes:
+        - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - "80:80"
+    # For debugging locally
+    #network_mode: host
+    networks:
+    - app-network
+
+  node:
+    image: quay.io/coverbeck/overbeck-backend-node:0.0.1
+    container_name: node
+    restart: unless-stopped
+    expose:
+      - "3000"
+    networks:
+      - app-network
+  
+  scala:
+    image: quay.io/coverbeck/overbeck-backend-scala:0.0.1
+    container_name: scala
+    restart: unless-stopped
+    tty: true
+    expose:
+      - "8080"
+    networks:
+      - app-network
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
