@@ -15,7 +15,7 @@ services:
     - app-network
 
   node:
-    image: quay.io/coverbeck/overbeck-backend-node:0.0.1
+    image: quay.io/coverbeck/overbeck-backend-node:0.0.2
     container_name: node
     restart: unless-stopped
     expose:
