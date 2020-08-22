@@ -15,7 +15,7 @@ services:
     - app-network
 
   scala:
-    image: quay.io/coverbeck/overbeck-backend-scala:scraper
+    image: quay.io/coverbeck/overbeck-backend-scala:0.0.3
     container_name: scala
     restart: unless-stopped
     tty: true
