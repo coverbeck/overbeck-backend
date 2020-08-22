@@ -14,19 +14,8 @@ services:
     networks:
     - app-network
 
-  node:
-    image: quay.io/coverbeck/overbeck-backend-node:0.0.2
-    container_name: node
-    restart: unless-stopped
-    expose:
-      - "3000"
-    networks:
-      - app-network
-    environment:
-      - APIKEY=${APIKEY}
-  
   scala:
-    image: quay.io/coverbeck/overbeck-backend-scala:0.0.2
+    image: quay.io/coverbeck/overbeck-backend-scala:0.0.3
     container_name: scala
     restart: unless-stopped
     tty: true
@@ -34,6 +23,11 @@ services:
       - "8080"
     networks:
       - app-network
+    volumes:
+        - ./scrape.json:/tmp/scrape.json
+    environment:
+      - APIKEY=${APIKEY}
+      - SCRAPE_CONFIG=/tmp/scrape.json
 
 #Docker Networks
 networks:
