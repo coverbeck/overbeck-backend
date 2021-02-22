@@ -10,12 +10,12 @@ services:
     ports:
       - "80:80"
     # For debugging locally
-    #network_mode: host
+    # network_mode: host
     networks:
     - app-network
 
   scala:
-    image: quay.io/coverbeck/overbeck-backend-scala:0.0.6
+    image: quay.io/coverbeck/overbeck-backend-scala:0.0.8
     container_name: scala
     restart: unless-stopped
     tty: true
@@ -28,6 +28,8 @@ services:
     environment:
       - APIKEY=${APIKEY}
       - SCRAPE_CONFIG=/tmp/scrape.json
+      - AMBIENT_APP_KEY=${AMBIENT_APP_KEY}
+      - AMBIENT_API_KEY=${AMBIENT_API_KEY}
 
 #Docker Networks
 networks:
